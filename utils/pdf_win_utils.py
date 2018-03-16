@@ -17,9 +17,7 @@ class PdfWinUtils:
             sys.exit(1)
         trail, fname = os.path.split(pdf_path)
         base, ext = os.path.splitext(fname)
-        file_type = ext[1:].upper()
-
-        if file_type in EXT_DOC:  # pdf
+        if ext.lower() in EXT_DOC:  # pdf
             page_imgs = self.__pdf2imgs_wand(pdf_path)
             paths = []
             for id in range(len(page_imgs)):

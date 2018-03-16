@@ -8,8 +8,7 @@ SHOW_RESULT = True
 LOG_DIR = "./logs/"
 
 # config the key for the google cloud apis -----------------------------------------------------------------------------
-API_KEY = "API key"
-
+API_KEY = "api key string"
 ENDPOINT_URL = 'https://vision.googleapis.com/v1/images:annotate'
 
 KEY_JSON = 'service_account_key.json'

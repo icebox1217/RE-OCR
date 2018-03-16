@@ -12,9 +12,7 @@ class PdfUbuntuUtils:
             sys.exit(1)
 
         _, ext = os.path.splitext(os.path.basename(pdf_path))
-        file_type = ext[1:].upper()
-
-        if file_type in EXT_DOC:
+        if ext.lower() in EXT_DOC:
             page_imgs = self.__pdf2imgs_ppm(pdf_path)
             # log_print("\tpages: # {}".format(len(page_imgs)))
             return page_imgs
