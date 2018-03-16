@@ -1,16 +1,13 @@
-import cv2
 import base64
 import json
-import requests
 import math
+import cv2
 import numpy as np
+import requests
 from PIL import Image, ExifTags
-from utils.config import *
 from logger import *
 
 
-# correlate the orientation of the input image with its meta infomation
-# and then return the cv_mat(ndarray) image
 def load_image(image_path):
     try:
         image = Image.open(image_path)
@@ -31,7 +28,6 @@ def load_image(image_path):
         cv_img = cv_img[:, :, ::-1].copy()
         return cv_img
     except (AttributeError, KeyError, IndexError):
-        # cases: image don't have getexif
         cv_img = cv2.imread(image_path)
         return cv_img
 
@@ -159,7 +155,6 @@ class VisionUtils:
             img = load_image(path)
             requests, resz_img = make_request(cv_img=img, feature_types=['DOCUMENT_TEXT_DETECTION', 'TEXT_DETECTION',
                                                                          'LABEL_DETECTION'])
-
             response = self.__get_response(requests)
             img = resz_img
 

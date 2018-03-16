@@ -6,7 +6,6 @@ from logger import *
 
 def rect_angle(anno):
     points = anno['boundingBox']['vertices']
-
     centerX = .0
     centerY = .0
     for i in range(4):
@@ -128,7 +127,7 @@ class PreProcUtils:
                 point['y'] = new_pt[1]
 
     def __calc_angle(self, annos):
-        # calculate the rotated angle
+        # calculate the calibration rotated angle
         avg_angle = .0
         cnt = 0
         for anno in annos:
@@ -140,5 +139,5 @@ class PreProcUtils:
         avg_angle /= cnt
         avg_angle_deg = avg_angle * 180 / math.pi
         if self.show_result:
-            log_print("\tangle to be Rotated: {}(deg)".format(avg_angle_deg))
+            log_print("\tCalibration Angle: {:0.2f}(deg)".format(avg_angle_deg))
         return -avg_angle_deg

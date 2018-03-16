@@ -1,6 +1,4 @@
-import os
 import io
-import sys
 import numpy as np
 import cv2
 from logger import *
@@ -14,11 +12,9 @@ class PdfWinUtils:
         self.resolution = resolution  # DPI
 
     def pdfTojpgs(self, pdf_path):
-
         if not os.path.exists(pdf_path):
             log_print("\tNo exist such pdf file {}".format(pdf_path))
             sys.exit(1)
-
         trail, fname = os.path.split(pdf_path)
         base, ext = os.path.splitext(fname)
         file_type = ext[1:].upper()
@@ -31,24 +27,19 @@ class PdfWinUtils:
                 img_path = os.path.join(trail, (base + "-" + str(id + 1) + ".jpg"))
                 cv2.imwrite(img_path, img)
                 paths.append(img_path)
-
             # log_print("\tpages: # {}".format(len(paths)))
             return paths
 
-        else:  # not yet
+        else:
             log_print("\tNot defined file type.")
 
     def __pdf2imgs_wand(self, _pdf_path):
-        # pages of pdf to images
         images = []
-
         reader = PdfFileReader(open(_pdf_path, "rb"))
 
         for page_num in range(reader.getNumPages()):
-            # read the page of pdf file
             src_page = reader.getPage(page_num)
 
-            # convert src_page to wand image with using PdfFileWriter(dst_page)
             dst_pdf = PdfFileWriter()
             dst_pdf.addPage(src_page)
 
@@ -65,9 +56,7 @@ class PdfWinUtils:
 
             if img_buffer is not None:
                 cv_img = cv2.imdecode(img_buffer, cv2.IMREAD_GRAYSCALE)
-
             images.append(cv_img)
-
         return images
 
 

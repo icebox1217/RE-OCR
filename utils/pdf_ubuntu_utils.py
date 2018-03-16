@@ -1,7 +1,5 @@
-import sys
-import os
 import logger as log
-from utils.config import *
+from config import *
 
 
 class PdfUbuntuUtils:
@@ -9,7 +7,6 @@ class PdfUbuntuUtils:
         pass
 
     def pdfTojpgs(self, pdf_path):
-
         if not os.path.isfile(pdf_path):
             log.log_print("\tNo exist such pdf file {}".format(pdf_path))
             sys.exit(1)
@@ -26,7 +23,6 @@ class PdfUbuntuUtils:
             sys.exit(1)
 
     def __pdf2imgs_ppm(self, _pdf_path):
-
         # get the base name for the converted jpg image files
         dir, fname = os.path.split(_pdf_path)
         base, ext = os.path.splitext(fname)

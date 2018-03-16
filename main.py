@@ -19,12 +19,7 @@ preproc_util = PreProcUtils(show_result=SHOW_RESULT)
 
 
 def ocr_func(pdf_path):
-    log_print("\nPdf File:".format(os.path.split(pdf_path)[1]))
-
-    # check if the document file is uploaded successfully or not
-    if not os.path.exists(pdf_path):
-        log_print("\t No exist such file! ")
-        sys.exit(1)
+    log_print("\nPdf File: {}".format(os.path.split(pdf_path)[1]))
 
     """ --- Convert the PDF to JPGs --- """
     log_print(" Convert PDF to JPGs ...")
@@ -76,6 +71,10 @@ def ocr_func(pdf_path):
         # pre-processing the content image and also align the annotations of the
         preproc_util.pre_proc(content=content)
 
+    for content in contents:
+        for anno in content['annotations']:
+            sys.stdout.write("\t {},".format(anno["text"]))
+
 
 if __name__ == '__main__':
     data_dir = "./data"
@@ -83,3 +82,4 @@ if __name__ == '__main__':
     for fn in fns:
         path = os.path.join(data_dir, fn)
         ocr_func(path)
+        break

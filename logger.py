@@ -1,6 +1,5 @@
 import logging
-from utils.config import *
-
+from config import *
 
 # check the LOG_DIR and create if it does not exists
 if not os.path.isdir(LOG_DIR):
