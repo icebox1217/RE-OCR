@@ -5,7 +5,7 @@ from utils.config import *
 # check the LOG_DIR and create if it does not exists
 if not os.path.isdir(LOG_DIR):
     os.mkdir(LOG_DIR)
-log_fn = LOG_DIR + "ocr-engine.log"
+log_fn = LOG_DIR + "hist.log"
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(message)s',
                     datefmt='%d/%b/%Y %H:%M:%S',
