@@ -1,5 +1,5 @@
 import logger as log
-from config import *
+from logger import *
 
 
 class PdfUbuntuUtils:
@@ -8,7 +8,7 @@ class PdfUbuntuUtils:
 
     def pdfTojpgs(self, pdf_path):
         if not os.path.isfile(pdf_path):
-            log.log_print("\tNo exist such pdf file {}".format(pdf_path))
+            log_print("\tNo exist such pdf file {}".format(pdf_path))
             sys.exit(1)
 
         _, ext = os.path.splitext(os.path.basename(pdf_path))
@@ -16,10 +16,10 @@ class PdfUbuntuUtils:
 
         if file_type in EXT_DOC:
             page_imgs = self.__pdf2imgs_ppm(pdf_path)
-            # log.log_print("\tpages: # {}".format(len(page_imgs)))
+            # log_print("\tpages: # {}".format(len(page_imgs)))
             return page_imgs
         else:  # not yet
-            log.log_print("Not defined file type.")
+            log_print("Not defined file type.")
             sys.exit(1)
 
     def __pdf2imgs_ppm(self, _pdf_path):
