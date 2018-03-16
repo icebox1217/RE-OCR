@@ -4,9 +4,9 @@ import json
 import requests
 import math
 import numpy as np
-import logger as log
 from PIL import Image, ExifTags
 from utils.config import *
+from logger import *
 
 
 # correlate the orientation of the input image with its meta infomation
@@ -142,7 +142,7 @@ class VisionUtils:
             return ret_json['responses'][0]
 
         except Exception as e:
-            log.print("\t\texcept: {}".format(e))
+            log_print("\t\texcept: {}".format(e))
             return None
     
     def __get_orientation(self, annos):
@@ -151,7 +151,7 @@ class VisionUtils:
             ori = rect_orientation(anno=anno)
             oris[ori] += 1
         if self.show_result:
-            log.print(" {}".format(oris))
+            log_print(" {}".format(oris))
         return oris.index(max(oris))
 
     def detect_text(self, path, idx, proc_queue):
@@ -179,7 +179,7 @@ class VisionUtils:
                               'label': ret_label,
                               'orientation': None,
                               'image': img}
-                    log.print("\t Not proper Invoice Document{}".format(ret_label))
+                    log_print("\t Not proper Invoice Document{}".format(ret_label))
                 else:
                     annos = []
                     document = response['fullTextAnnotation']
@@ -221,5 +221,5 @@ class VisionUtils:
 
             proc_queue.put(result, True, 1)
         except Exception as e:
-            log.print("\t exception :" + str(e))
+            log_print("\t exception :" + str(e))
             pass

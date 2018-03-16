@@ -1,7 +1,7 @@
 import imutils
 import math
 import cv2
-import logger as log
+from logger import *
 
 
 def rect_angle(anno):
@@ -140,5 +140,5 @@ class PreProcUtils:
         avg_angle /= cnt
         avg_angle_deg = avg_angle * 180 / math.pi
         if self.show_result:
-            log.print("\tangle to be Rotated: {}(deg)".format(avg_angle_deg))
+            log_print("\tangle to be Rotated: {}(deg)".format(avg_angle_deg))
         return -avg_angle_deg

@@ -3,7 +3,7 @@ import io
 import sys
 import numpy as np
 import cv2
-import logger as log
+from logger import *
 from wand.image import Image as WandImage
 from wand.color import Color as WandColor
 from PyPDF2 import PdfFileReader, PdfFileWriter
@@ -16,7 +16,7 @@ class PdfWinUtils:
     def pdfTojpgs(self, pdf_path):
 
         if not os.path.exists(pdf_path):
-            log.print("\tNo exist such pdf file {}".format(pdf_path))
+            log_print("\tNo exist such pdf file {}".format(pdf_path))
             sys.exit(1)
 
         trail, fname = os.path.split(pdf_path)
@@ -32,11 +32,11 @@ class PdfWinUtils:
                 cv2.imwrite(img_path, img)
                 paths.append(img_path)
 
-            # log.print("\tpages: # {}".format(len(paths)))
+            # log_print("\tpages: # {}".format(len(paths)))
             return paths
 
         else:  # not yet
-            log.print("\tNot defined file type.")
+            log_print("\tNot defined file type.")
 
     def __pdf2imgs_wand(self, _pdf_path):
         # pages of pdf to images
