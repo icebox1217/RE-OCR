@@ -2,6 +2,8 @@ import threading as thr
 from utils.vision_utils import VisionUtils
 from utils.pre_proc_utils import PreProcUtils
 from logger import *
+
+
 if sys.version_info[0] == 2:
     from utils.pdf_ubuntu_utils import PdfUbuntuUtils  # for ubuntu
     pdf_util = PdfUbuntuUtils()
@@ -12,13 +14,10 @@ if sys.version_info[0] == 3:
     import queue as qu
 
 
-# initialize the google cloud api credentials
-log_print("--- Config The Google Cloud OCR API ---")
 vision_util = VisionUtils(show_result=SHOW_RESULT)
 preproc_util = PreProcUtils(show_result=SHOW_RESULT)
 
 
-# main ocr function
 def ocr_func(pdf_path):
     log_print("\nPdf File:".format(os.path.split(pdf_path)[1]))
 
@@ -36,14 +35,13 @@ def ocr_func(pdf_path):
         page_img_paths = [pdf_path]
     page_img_paths.sort()
 
-    """ detect the text from the page images with google cloug vision ocr api  ------------------------------------- """
+    """ --- Detect the Text --- """
     log_print(" Detect the text from Images ...")
     pages_contents_queue = qu.Queue()
     threads = []
 
-    # multi-threading for calling the google vision ocr api
-    # a thread for a page image
-    # response would be returned as a queue of the content object
+    # multi-threading for calling the google vision ocr api a thread for a page image response would be returned as a
+    # queue of the content object
     while pages_contents_queue.qsize() == 0:
         for path in page_img_paths:
             idx = page_img_paths.index(path)
@@ -67,7 +65,6 @@ def ocr_func(pdf_path):
         contents.append(content)
 
     """ Show the detect Text ------------------------------------------------------------------------------------ """
-    tur_flag = False
     for content in contents:
         if content['annotations'] is None:
             continue
